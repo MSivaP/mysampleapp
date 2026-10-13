@@ -1,0 +1,17 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Vaadin Sampleapp example,com.devopsdemo.helper,GenericResourceBundle,109,0,16,0,25,0,12,0,4,0
+Vaadin Sampleapp example,com.devopsdemo.tutorial.addressbook,AddressbookUI.new ContactForm.ContactFormListener() {...},15,0,0,0,5,0,3,0,3,0
+Vaadin Sampleapp example,com.devopsdemo.tutorial.addressbook,ContactForm,219,0,16,0,43,0,18,0,10,0
+Vaadin Sampleapp example,com.devopsdemo.tutorial.addressbook,AddressbookUI,220,0,0,0,37,0,8,0,8,0
+Vaadin Sampleapp example,com.devopsdemo.tutorial.addressbook,AddressbookUI.MyUIServlet,12,0,0,0,4,0,2,0,2,0
+Vaadin Sampleapp example,com.devopsdemo.utilities,GenericComparator,262,0,42,0,60,0,37,0,12,0
+Vaadin Sampleapp example,com.devopsdemo.utilities,CaseInsensitiveComparator,50,0,8,0,13,0,8,0,4,0
+Vaadin Sampleapp example,com.devopsdemo.utilities,HexAsciiConvertor,106,3,16,0,23,1,12,1,4,1
+Vaadin Sampleapp example,com.devopsdemo.utilities,StringUtilities,279,0,42,0,57,0,29,0,8,0
+Vaadin Sampleapp example,com.devopsdemo.utilities,PropertyHelper,51,0,0,0,15,0,7,0,7,0
+Vaadin Sampleapp example,com.devopsdemo.utilities,PropertyLoader,77,0,12,0,22,0,11,0,5,0
+Vaadin Sampleapp example,com.devopsdemo.utilities,LoggerStackTraceUtil,95,65,13,3,20,12,10,3,2,3
+Vaadin Sampleapp example,com.devopsdemo.utilities,GenericComparator.CompareMode,27,0,0,0,1,0,1,0,1,0
+Vaadin Sampleapp example,com.devopsdemo.utilities,PrepareTargetMethod,92,0,22,0,14,0,14,0,3,0
+Vaadin Sampleapp example,com.devopsdemo.tutorial.addressbook.backend,Contact,102,0,0,0,32,0,15,0,15,0
+Vaadin Sampleapp example,com.devopsdemo.tutorial.addressbook.backend,ContactService,337,0,16,0,36,0,15,0,7,0

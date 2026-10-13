@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ContactForm.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Vaadin Sampleapp example</a> &gt; <a href="index.source.html" class="el_package">com.devopsdemo.tutorial.addressbook</a> &gt; <span class="el_source">ContactForm.java</span></div><h1>ContactForm.java</h1><pre class="source lang-java linenums">package com.devopsdemo.tutorial.addressbook;
+
+import com.devopsdemo.tutorial.addressbook.backend.Contact;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
+
+/* Create custom UI Components.
+ *
+ * Create your own Vaadin components by inheritance and composition.
+ * This is a form component inherited from VerticalLayout. Use
+ * Use BeanFieldGroup to bind data fields from DTO to UI fields.
+ * Similarly named field by naming convention or customized
+ * with @PropertyId annotation.
+ */
+
+public class ContactForm extends FormLayout {
+    private boolean isUIAvailable() {
+        try {
+<span class="nc bnc" id="L24" title="All 2 branches missed.">            return com.vaadin.flow.component.UI.getCurrent() != null;</span>
+<span class="nc" id="L25">        } catch (Exception e) {</span>
+<span class="nc" id="L26">            return false;</span>
+        }
+    }
+    public interface ContactFormListener {
+        void onSave();
+        void onCancel();
+    }
+
+    private ContactFormListener listener;
+    public void setListener(ContactFormListener listener) {
+<span class="nc" id="L36">        this.listener = listener;</span>
+<span class="nc" id="L37">    }</span>
+
+<span class="nc" id="L39">    public final Button save = new Button(&quot;Save&quot;);</span>
+<span class="nc" id="L40">    public final Button cancel = new Button(&quot;Cancel&quot;);</span>
+<span class="nc" id="L41">    public final TextField firstName = new TextField(&quot;First name&quot;);</span>
+<span class="nc" id="L42">    public final TextField lastName = new TextField(&quot;Last name&quot;);</span>
+<span class="nc" id="L43">    public final TextField phone = new TextField(&quot;Phone&quot;);</span>
+<span class="nc" id="L44">    public final TextField email = new TextField(&quot;Email&quot;);</span>
+<span class="nc" id="L45">    public final DatePicker birthDate = new DatePicker(&quot;Birth date&quot;);</span>
+
+<span class="nc" id="L47">    private final Binder&lt;Contact&gt; binder = new Binder&lt;&gt;(Contact.class);</span>
+    private Contact contact;
+
+<span class="nc" id="L50">    public ContactForm() {</span>
+<span class="nc" id="L51">        configureComponents();</span>
+<span class="nc" id="L52">        buildLayout();</span>
+<span class="nc" id="L53">    }</span>
+
+    private void configureComponents() {
+<span class="nc" id="L56">        save.addClickListener(e -&gt; save());</span>
+<span class="nc" id="L57">        cancel.addClickListener(e -&gt; cancel());</span>
+<span class="nc" id="L58">        binder.bindInstanceFields(this);</span>
+<span class="nc" id="L59">        setVisible(false);</span>
+<span class="nc" id="L60">    }</span>
+
+    private void buildLayout() {
+<span class="nc" id="L63">        setSizeUndefined();</span>
+<span class="nc" id="L64">        HorizontalLayout actions = new HorizontalLayout(save, cancel);</span>
+<span class="nc" id="L65">        add(actions, firstName, lastName, phone, email, birthDate);</span>
+<span class="nc" id="L66">    }</span>
+
+    private void save() {
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (contact != null) {</span>
+<span class="nc" id="L70">            binder.writeBeanIfValid(contact);</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">            if (isUIAvailable()) {</span>
+<span class="nc" id="L72">                Notification.show(String.format(&quot;Saved '%s %s'.&quot;, contact.getFirstName(), contact.getLastName()));</span>
+            }
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            if (listener != null) listener.onSave();</span>
+        }
+<span class="nc" id="L76">    }</span>
+
+    private void cancel() {
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (isUIAvailable()) {</span>
+<span class="nc" id="L80">            Notification.show(&quot;Cancelled&quot;);</span>
+        }
+<span class="nc" id="L82">        setVisible(false);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (listener != null) listener.onCancel();</span>
+<span class="nc" id="L84">    }</span>
+
+    public void edit(Contact contact) {
+<span class="nc" id="L87">        this.contact = contact;</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (contact != null) {</span>
+<span class="nc" id="L89">            binder.readBean(contact);</span>
+<span class="nc" id="L90">            firstName.focus();</span>
+        }
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        setVisible(contact != null);</span>
+<span class="nc" id="L93">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

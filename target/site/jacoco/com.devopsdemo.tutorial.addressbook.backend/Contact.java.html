@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Contact.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Vaadin Sampleapp example</a> &gt; <a href="index.source.html" class="el_package">com.devopsdemo.tutorial.addressbook.backend</a> &gt; <span class="el_source">Contact.java</span></div><h1>Contact.java</h1><pre class="source lang-java linenums">package com.devopsdemo.tutorial.addressbook.backend;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+
+/**
+ * A simple DTO for the address book example.
+ *
+ * Serializable and cloneable Java Object that are typically persisted
+ * in the database and can also be easily converted to different formats like JSON.
+ */
+// Backend DTO class. This is just a typical Java backend implementation
+// class and nothing Vaadin specific.
+<span class="nc" id="L14">public class Contact implements Serializable, Cloneable {</span>
+
+    private Long id;
+
+<span class="nc" id="L18">    private String firstName = &quot;&quot;;</span>
+<span class="nc" id="L19">    private String lastName = &quot;&quot;;</span>
+<span class="nc" id="L20">    private String phone = &quot;&quot;;</span>
+<span class="nc" id="L21">    private String email = &quot;&quot;;</span>
+    private LocalDate birthDate;
+
+    public Long getId() {
+<span class="nc" id="L25">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L29">        this.id = id;</span>
+<span class="nc" id="L30">    }</span>
+
+    public String getFirstName() {
+<span class="nc" id="L33">        return firstName;</span>
+    }
+
+    public void setFirstName(String firstName) {
+<span class="nc" id="L37">        this.firstName = firstName;</span>
+<span class="nc" id="L38">    }</span>
+
+    public String getLastName() {
+<span class="nc" id="L41">        return lastName;</span>
+    }
+
+    public void setLastName(String lastName) {
+<span class="nc" id="L45">        this.lastName = lastName;</span>
+<span class="nc" id="L46">    }</span>
+
+    public String getPhone() {
+<span class="nc" id="L49">        return phone;</span>
+    }
+
+    public void setPhone(String phone) {
+<span class="nc" id="L53">        this.phone = phone;</span>
+<span class="nc" id="L54">    }</span>
+
+    public String getEmail() {
+<span class="nc" id="L57">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="nc" id="L61">        this.email = email;</span>
+<span class="nc" id="L62">    }</span>
+
+    public LocalDate getBirthDate() {
+<span class="nc" id="L65">        return birthDate;</span>
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+<span class="nc" id="L69">        this.birthDate = birthDate;</span>
+<span class="nc" id="L70">    }</span>
+
+    @Override
+    public Contact clone() {
+<span class="nc" id="L74">        Contact cloned = new Contact();</span>
+<span class="nc" id="L75">        cloned.setId(this.id);</span>
+<span class="nc" id="L76">        cloned.setFirstName(this.firstName);</span>
+<span class="nc" id="L77">        cloned.setLastName(this.lastName);</span>
+<span class="nc" id="L78">        cloned.setPhone(this.phone);</span>
+<span class="nc" id="L79">        cloned.setEmail(this.email);</span>
+<span class="nc" id="L80">        cloned.setBirthDate(this.birthDate);</span>
+<span class="nc" id="L81">        return cloned;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L86">        return &quot;Contact{&quot; + &quot;id=&quot; + id + &quot;, firstName=&quot; + firstName</span>
+                + &quot;, lastName=&quot; + lastName + &quot;, phone=&quot; + phone + &quot;, email=&quot;
+                + email + &quot;, birthDate=&quot; + birthDate + '}';
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

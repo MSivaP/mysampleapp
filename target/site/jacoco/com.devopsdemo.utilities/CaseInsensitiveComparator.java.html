@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaseInsensitiveComparator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Vaadin Sampleapp example</a> &gt; <a href="index.source.html" class="el_package">com.devopsdemo.utilities</a> &gt; <span class="el_source">CaseInsensitiveComparator.java</span></div><h1>CaseInsensitiveComparator.java</h1><pre class="source lang-java linenums">package com.devopsdemo.utilities;
+
+import java.io.Serializable;
+
+/**
+ * Case insensitive comparator that extends GenericComparator
+ */
+public class CaseInsensitiveComparator extends GenericComparator implements Serializable {
+    
+    private static final long serialVersionUID = -1090853647040528L;
+
+    public CaseInsensitiveComparator(boolean sortAscending) {
+<span class="nc" id="L13">        super(sortAscending);</span>
+<span class="nc" id="L14">    }</span>
+
+    public CaseInsensitiveComparator(String sortField) {
+<span class="nc" id="L17">        super(sortField);</span>
+<span class="nc" id="L18">    }</span>
+
+    public CaseInsensitiveComparator(String sortField, boolean sortAscending) {
+<span class="nc" id="L21">        super(sortField, sortAscending);</span>
+<span class="nc" id="L22">    }</span>
+
+    /**
+     * Case insensitive comparison of values.
+     */
+    @Override
+    protected int compareActual(Object value1, Object value2, String returnType) {
+        // If both values are strings, do case-insensitive string comparison
+<span class="nc bnc" id="L30" title="All 4 branches missed.">        if (value1 instanceof String &amp;&amp; value2 instanceof String) {</span>
+<span class="nc" id="L31">            return ((String) value1).compareToIgnoreCase((String) value2) * determinePosition();</span>
+        }
+        
+        // If one value is a string and one isn't, string values come after non-string values
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (value1 instanceof String) {</span>
+<span class="nc" id="L36">            return 1 * determinePosition(); // String comes after non-string</span>
+        }
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (value2 instanceof String) {</span>
+<span class="nc" id="L39">            return -1 * determinePosition(); // Non-string comes before string</span>
+        }
+
+        // For non-string values, use regular comparison from parent
+<span class="nc" id="L43">        return super.compareActual(value1, value2, returnType);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

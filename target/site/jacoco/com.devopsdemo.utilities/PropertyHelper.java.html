@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PropertyHelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Vaadin Sampleapp example</a> &gt; <a href="index.source.html" class="el_package">com.devopsdemo.utilities</a> &gt; <span class="el_source">PropertyHelper.java</span></div><h1>PropertyHelper.java</h1><pre class="source lang-java linenums">package com.devopsdemo.utilities;
+
+import java.util.HashMap;
+import java.util.Properties;
+
+/**
+ * Helper Class to load Properties from a property file to be passed to caller for execution.
+ * Multiple properties can be loaded.
+ * Note that if the same property is specified multiple times in a single file, there is no guaranteed &quot;Winner&quot;.
+ * Also note in the case of loading multiple files and duplicate definition of properties across files,
+ * the last loaded property file &quot;wins&quot;.
+ * The getProperty()/get() methods also return &quot;&quot; silently if no such query exists.
+ */
+<span class="nc" id="L14">public final class PropertyHelper {</span>
+
+    /**
+     * hMapProperties contains the hashmap of key/value pairs associated with each property
+     */
+<span class="nc" id="L19">    protected static final HashMap&lt;String, Object&gt; HMAPPROPERTIES = new HashMap&lt;&gt;();</span>
+
+    /**
+     * Loads properties from a file into a HashMap.
+     *
+     * @param propertyFile the property file to load
+     * @return a HashMap containing the properties
+     */
+    public static HashMap&lt;String, Object&gt; loadProperties(String propertyFile) {
+<span class="nc" id="L28">        var properties = PropertyLoader.loadProperties(propertyFile);</span>
+<span class="nc" id="L29">        properties.stringPropertyNames().forEach(</span>
+<span class="nc" id="L30">            key -&gt; HMAPPROPERTIES.put(key, properties.getProperty(key))</span>
+        );
+<span class="nc" id="L32">        return HMAPPROPERTIES;</span>
+    }
+
+    /**
+     * Retrieves the value of a property by name.
+     *
+     * @param propertyName the name of the property
+     * @return the value of the property, or an empty string if not found
+     */
+    public static String getProperty(String propertyName) {
+        try {
+<span class="nc" id="L43">            return (String) HMAPPROPERTIES.getOrDefault(propertyName, &quot;&quot;);</span>
+<span class="nc" id="L44">        } catch (Exception e) {</span>
+<span class="nc" id="L45">            LoggerStackTraceUtil.printErrorMessage(e);</span>
+<span class="nc" id="L46">            return &quot;&quot;;</span>
+        }
+    }
+
+    /**
+     * Retrieves the value of a property by name, or a default value if the property is not found.
+     *
+     * @param propertyName the name of the property
+     * @param strDefault   the default value to return if the property is not found
+     * @return the value of the property, or the default value if not found
+     */
+    public static String getProperty(String propertyName, String strDefault) {
+        try {
+<span class="nc" id="L59">            return (String) HMAPPROPERTIES.getOrDefault(propertyName, strDefault);</span>
+<span class="nc" id="L60">        } catch (Exception e) {</span>
+<span class="nc" id="L61">            LoggerStackTraceUtil.printErrorMessage(e);</span>
+<span class="nc" id="L62">            return strDefault;</span>
+        }
+    }
+
+    /**
+     * A convenience method (aliasing getProperty).
+     *
+     * @param propertyName the property to be retrieved
+     * @return the value of the property
+     */
+    public static String get(String propertyName) {
+<span class="nc" id="L73">        return getProperty(propertyName);</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

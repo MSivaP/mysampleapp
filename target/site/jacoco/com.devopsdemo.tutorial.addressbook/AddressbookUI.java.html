@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddressbookUI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Vaadin Sampleapp example</a> &gt; <a href="index.source.html" class="el_package">com.devopsdemo.tutorial.addressbook</a> &gt; <span class="el_source">AddressbookUI.java</span></div><h1>AddressbookUI.java</h1><pre class="source lang-java linenums">package com.devopsdemo.tutorial.addressbook;
+
+import jakarta.servlet.annotation.WebServlet;
+
+import jakarta.servlet.ServletException;
+
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinServlet;
+import com.devopsdemo.tutorial.addressbook.backend.Contact;
+import com.devopsdemo.tutorial.addressbook.backend.ContactService;
+
+@Route(&quot;/&quot;)
+public class AddressbookUI extends VerticalLayout {
+
+<span class="nc" id="L20">    final TextField filter = new TextField(&quot;Filter contacts...&quot;);</span>
+<span class="nc" id="L21">    final Grid&lt;Contact&gt; contactList = new Grid&lt;&gt;(Contact.class);</span>
+<span class="nc" id="L22">    final Button newContact = new Button(&quot;New contact&quot;);</span>
+<span class="nc" id="L23">    final ContactForm contactForm = new ContactForm();</span>
+<span class="nc" id="L24">    final ContactService service = ContactService.createDemoService();</span>
+
+<span class="nc" id="L26">    public AddressbookUI() {</span>
+<span class="nc" id="L27">        contactForm.setListener(new ContactForm.ContactFormListener() {</span>
+            @Override
+            public void onSave() {
+<span class="nc" id="L30">                refreshContacts();</span>
+<span class="nc" id="L31">            }</span>
+            @Override
+            public void onCancel() {
+<span class="nc" id="L34">                contactList.deselectAll();</span>
+<span class="nc" id="L35">            }</span>
+        });
+<span class="nc" id="L37">        configureComponents();</span>
+<span class="nc" id="L38">        buildLayout();</span>
+<span class="nc" id="L39">    }</span>
+
+    private void configureComponents() {
+<span class="nc" id="L42">        newContact.addClickListener(e -&gt; contactForm.edit(new Contact()));</span>
+
+<span class="nc" id="L44">        filter.setPlaceholder(&quot;Filter contacts...&quot;);</span>
+<span class="nc" id="L45">        filter.addValueChangeListener(e -&gt; refreshContacts(e.getValue()));</span>
+
+<span class="nc" id="L47">        contactList.setColumns(&quot;firstName&quot;, &quot;lastName&quot;, &quot;email&quot;);</span>
+<span class="nc" id="L48">        contactList.setSelectionMode(Grid.SelectionMode.SINGLE);</span>
+<span class="nc" id="L49">        contactList.asSingleSelect().addValueChangeListener(</span>
+<span class="nc" id="L50">                e -&gt; contactForm.edit(e.getValue()));</span>
+
+<span class="nc" id="L52">        refreshContacts();</span>
+<span class="nc" id="L53">    }</span>
+
+    private void buildLayout() {
+<span class="nc" id="L56">        HorizontalLayout actions = new HorizontalLayout(filter, newContact);</span>
+<span class="nc" id="L57">        actions.setWidthFull();</span>
+<span class="nc" id="L58">        filter.setWidthFull();</span>
+<span class="nc" id="L59">        actions.expand(filter);</span>
+
+<span class="nc" id="L61">        VerticalLayout left = new VerticalLayout(actions, contactList);</span>
+<span class="nc" id="L62">        left.setSizeFull();</span>
+<span class="nc" id="L63">        contactList.setSizeFull();</span>
+<span class="nc" id="L64">        left.expand(contactList);</span>
+
+<span class="nc" id="L66">        HorizontalLayout mainLayout = new HorizontalLayout(left, contactForm);</span>
+<span class="nc" id="L67">        mainLayout.setSizeFull();</span>
+<span class="nc" id="L68">        mainLayout.expand(left);</span>
+
+<span class="nc" id="L70">        add(mainLayout);</span>
+<span class="nc" id="L71">    }</span>
+
+    private void refreshContacts() {
+<span class="nc" id="L74">        refreshContacts(filter.getValue());</span>
+<span class="nc" id="L75">    }</span>
+
+    private void refreshContacts(String stringFilter) {
+<span class="nc" id="L78">        contactList.setItems(service.findAll(stringFilter));</span>
+<span class="nc" id="L79">        contactForm.setVisible(false);</span>
+<span class="nc" id="L80">    }</span>
+
+    @WebServlet(urlPatterns = &quot;/*&quot;, name = &quot;MyUIServlet&quot;, asyncSupported = true)
+<span class="nc" id="L83">    public static class MyUIServlet extends VaadinServlet {</span>
+        @Override
+        protected void servletInitialized() throws ServletException {
+<span class="nc" id="L86">            super.servletInitialized();</span>
+<span class="nc" id="L87">            getService().setClassLoader(getClass().getClassLoader());</span>
+<span class="nc" id="L88">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
