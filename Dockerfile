@@ -2,6 +2,7 @@ FROM tomcat:latest
 MAINTAINER Siva-Tech
 COPY target/sampleapp.war /usr/local/tomcat/webapps
 RUN mkdir /usr/local/siva
+RUN mkdir /usr/local/mydir
 ENV TOMCAT_HOME /usr/local/tomcat
 RUN mkdir $TOMCAT_HOME/mysampleapp
 RUN apt update
